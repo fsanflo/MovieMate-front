@@ -1,0 +1,28 @@
+
+// button {
+//     border-color: var(--primario);
+//     // background-color: var(--terciario);
+//     color: white;
+
+//     &:hover {
+//         border-color: var(--primario);
+//         background-color: var(--terciario);
+//         transform: scale(1.05);
+//         transition: all 0.2s;
+//     }
+// }
+
+.tarjeta {
+    background-color: var(--secundario);
+
+    .portada {
+        background-color: var(--primario);
+        aspect-ratio:  0.7/1; //Calculado por la proporción de la imagen de la portada
+    }
+}
+
+.custom-autocomplete-panel {
+    position: absolute !important;
+    top: auto !important;
+    bottom: auto !important;
+}

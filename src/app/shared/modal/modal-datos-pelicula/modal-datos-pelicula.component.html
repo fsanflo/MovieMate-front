@@ -1,0 +1,71 @@
+<div class="modalPelicula p-4">
+  <div class="row">
+    <div class="col-12">
+      <h2>{{ pelicula.titulo }}</h2>
+    </div>
+
+    <div class="col-4 row p-3 miki">
+      <img [src]="pelicula.portada ?? no_img" class="img-fluid img-modal" />
+      <div class="col-12 text-center mt-2">
+        <span *ngFor="let genero of generos">
+          {{ genero.nombre }}
+          <span *ngIf="generos[generos.length - 1].id !== genero.id">/</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="col-8 row">
+      <div class="col-12">
+        <h5>Trama:</h5>
+        <p class="mb-0">{{ pelicula.trama }}</p>
+        <p *ngIf="pelicula.trama === ''">No hay trama</p>
+      </div>
+
+      <div class="col-6">
+        <p class="mb-0"><em>{{ pelicula.duracion }} min</em></p>
+      </div>
+
+      <div class="col-6 anho">
+        <p class="text-end mb-0">{{ pelicula.anho }}</p>
+      </div>
+
+      <div class="col-12">
+        <p class="text-end mb-1">
+          <span>{{ pelicula.valoraciones | number : "1.1-1" }} / 10</span>
+          <i class="fas fa-star"></i>
+        </p>
+      </div>
+
+      <div *ngIf="pelicula.director">
+        <span class="h5 mr-2">Director: </span
+        ><span>{{ pelicula.director }}</span>
+      </div>
+      <div class="d-flex wrap">
+        <div class="actor-container" *ngFor="let actor of actores">
+          <div class="actor-image">
+            <img
+              class="rounded img-actor"
+              [src]="actor.imagen ?? no_img"
+              [alt]="actor.nombre"
+            />
+          </div>
+          <div class="actor-name">
+            <span>
+              <strong>{{ actor.nombre }}</strong>
+            </span>
+          </div>
+          <div class="actor-personaje">
+            <span>
+              <em>"{{ actor.personaje }}"</em>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12"></div>
+  </div>
+  <div mat-dialog-actions class="d-flex justify-content-end">
+    <button class="btn btn-primary" (click)="onNoClick()">Cerrar</button>
+  </div>
+</div>

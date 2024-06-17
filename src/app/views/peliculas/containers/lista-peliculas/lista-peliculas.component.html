@@ -1,0 +1,26 @@
+<div>
+  <div>
+    <h3 class="m-4">{{ title }}</h3>
+  </div>
+
+  <ng-container>
+    <div class="row m-4">
+      <div
+        *ngFor="let pelicula of peliculas"
+        class="col-2 tarjeta rounded p-3 text-center"
+      >
+        <div
+          class="portada rounded mb-2"
+          (click)="seleccionarPelicula(pelicula)"
+        >
+          <img
+            [src]="pelicula.portada ?? no_img"
+            [alt]="pelicula.titulo"
+            class="w-100 h-100 rounded"
+          />
+        </div>
+        <span>{{ pelicula.titulo }}</span>
+      </div>
+    </div>
+  </ng-container>
+</div>
