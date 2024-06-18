@@ -142,8 +142,7 @@ export class InputPeliculasComponent implements OnInit {
         pelicula2: this.pelicula2.id,
       };
 
-      this.peliculaService.peliculasPorGenero(idPeliculas);
-      this.router.navigateByUrl(`/list`);
+      this.peliculaService.peliculasPorGenero(idPeliculas);      
 
     } else {
       //TODO SNACKBAR ERROR

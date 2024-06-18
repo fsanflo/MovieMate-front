@@ -5,7 +5,9 @@ import { LoginComponent } from './views/auth/containers/login/login.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { RegistroComponent } from './views/auth/containers/registro/registro.component';
 import { AdminUsuariosComponent } from './views/auth/containers/admin-usuarios/admin-usuarios.component';
+import { AdminEditarUsuarioComponent } from './views/auth/containers/admin-editar-usuario/admin-editar-usuario.component';
 export const routes: Routes = [
+
     {
         path: 'login',
         component: LoginComponent,
@@ -13,8 +15,8 @@ export const routes: Routes = [
     {
         path: 'register',
         component: RegistroComponent,
-    },
-    {
+        },
+        {
         path: '',
         component: InputPeliculasComponent,
         canActivate: [AuthGuard],
@@ -33,5 +35,14 @@ export const routes: Routes = [
         path: 'admin',
         component: AdminUsuariosComponent,
         canActivate: [AuthGuard],
+    },
+    {
+        path: 'edit/:id',
+        component: AdminEditarUsuarioComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: '**',
+        component: InputPeliculasComponent,
     },
 ];

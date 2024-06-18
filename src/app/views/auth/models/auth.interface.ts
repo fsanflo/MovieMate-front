@@ -8,6 +8,7 @@ export interface Usuario {
 export interface UsuarioSaneado {
     id: number;
     idRol: number;
+    rol?: RolTipo
     nombre: string;
     email: string;
 }
@@ -15,4 +16,13 @@ export interface UsuarioSaneado {
 export interface Login {
     email: string;
     contrasehna: string;
+}
+export interface Rol {
+    id?: number
+    tipo: string,
+}
+
+type RolTipo = {
+    id?: number
+    tipo?: string,
 }

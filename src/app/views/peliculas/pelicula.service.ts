@@ -3,6 +3,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Helpers } from '../../shared/helpers/helpers';
 import { BehaviorSubject, Observable, catchError } from 'rxjs';
 import { Actor, Genero, Pelicula } from './models/peliculas.interface';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -13,7 +14,8 @@ export class PeliculaService {
   peliculas$: Observable<Pelicula[]> = this.peliculasPorGeneros.asObservable();
   private apiUrl = `http://localhost:3001/api`;
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router:Router,
   ) { }
 
   buscarPeliculas(titulo: string): Observable<Pelicula> {
@@ -32,6 +34,7 @@ export class PeliculaService {
       .subscribe(response => {
         const peliculas = response.listaPeliculas;
         this.peliculasPorGeneros.next(peliculas);
+        this.router.navigateByUrl(`/list`);
 
       });
   }

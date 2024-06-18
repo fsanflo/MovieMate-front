@@ -1,10 +1,14 @@
 <ng-container>
+  <div>
+    <h3 class="m-4">{{ title }}</h3>
+  </div>
   <div class="m-4 row">
     <table>
       <thead>
         <tr>
           <th nzColumnKey="nombre">Nombre</th>
           <th nzColumnKey="email">Email</th>
+          <th nzColumnKey="rol">Rol</th>
           <th></th>
         </tr>
       </thead>
@@ -12,6 +16,7 @@
         <tr *ngFor="let usuario of usuarios">
           <td>{{ usuario.nombre }}</td>
           <td>{{ usuario.email }}</td>
+          <td>{{ usuario.rol?.tipo ?? "miki" }}</td>
           <td>
             <div class="text-end">
               <button

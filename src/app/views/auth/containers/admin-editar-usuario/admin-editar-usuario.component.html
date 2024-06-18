@@ -1,0 +1,67 @@
+<ng-container>
+  <div>
+    <h3 class="m-4">{{ title }}</h3>
+  </div>
+  <form [formGroup]="editarUsuarioForm" class="m-3 row">
+    <div class="col-3">
+      <mat-form-field class="w-100 my-2">
+        <mat-label>Nombre</mat-label>
+        <input formControlName="nombre" matInput type="text" required />
+      </mat-form-field>
+      <ng-container *ngIf="corregir">
+        <mat-error
+          *ngIf="editarUsuarioForm.get('nombre')?.hasError('required')"
+        >
+          El nombre es requerido
+        </mat-error>
+      </ng-container>
+    </div>
+
+    <div class="col-6">
+      <mat-form-field class="w-100 my-2">
+        <mat-label>Email</mat-label>
+        <input formControlName="email" matInput type="email" required />
+      </mat-form-field>
+      <ng-container *ngIf="corregir">
+        <mat-error *ngIf="editarUsuarioForm.get('email')?.hasError('required')">
+          El email es requerido
+        </mat-error>
+        <mat-error *ngIf="editarUsuarioForm.get('email')?.hasError('email')">
+          El email no es válido
+        </mat-error>
+      </ng-container>
+    </div>
+
+    <div class="col-3">
+      <mat-form-field class="w-100 my-2">
+        <mat-label>Rol</mat-label>
+        <mat-select formControlName="idRol">
+          <mat-option *ngFor="let rol of roles" [value]="rol.id">
+            {{ rol.tipo }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <ng-container *ngIf="corregir">
+        <mat-error *ngIf="editarUsuarioForm.get('idRol')?.hasError('required')">
+          El rol es requerido
+        </mat-error>
+      </ng-container>
+    </div>
+  </form>
+  <div class="row m-3">
+    <div class="col-5">
+      <button class="btn btn-mm w-100" type="button" (click)="redirigirAdmin()">
+        Atrás
+      </button>
+    </div>
+    <div class="col-7 text-right">
+      <button
+        class="btn btn-primary w-100"
+        type="button"
+        (click)="submitEditarUsuarioForm()"
+      >
+        Aplicar
+      </button>
+    </div>
+  </div>
+</ng-container>

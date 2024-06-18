@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Helpers } from '../../shared/helpers/helpers';
 import { BehaviorSubject, Observable, catchError, tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { Login, Usuario, UsuarioSaneado } from './models/auth.interface';
+import { Login, Rol, Usuario, UsuarioSaneado } from './models/auth.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -46,11 +46,25 @@ export class AuthService {
     return this.http.post(url, usuario).pipe(catchError(Helpers.handleError));
   }
 
-  listaUsuarios(): Observable<UsuarioSaneado[]>{
+  listaUsuarios(): Observable<UsuarioSaneado[]> {
     const url = `${this.apiUrl}/auth`
     return this.http.get<UsuarioSaneado[]>(url).pipe(catchError(Helpers.handleError));
   }
 
+  datosUsuario(id: number): any {
+    const url = `${this.apiUrl}/auth/data/${id}`
+    return this.http.get(url).pipe(catchError(Helpers.handleError));
+  }
+
+  obtenerRoles(): Observable<Rol[]> {
+    const url = `${this.apiUrl}/auth/roles`
+    return this.http.get<Rol[]>(url).pipe(catchError(Helpers.handleError));
+  }
+
+  actualizarActor(id:number ,usuario: any) {
+    const url = `${this.apiUrl}/auth/update/${id}`
+    return this.http.post(url, usuario).pipe(catchError(Helpers.handleError));
+  }
 
   getToken(): string | null {
     return localStorage.getItem("token");

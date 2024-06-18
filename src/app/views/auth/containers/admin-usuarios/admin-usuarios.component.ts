@@ -16,6 +16,7 @@ import { NzTableModule } from "ng-zorro-antd/table";
   styleUrl: './admin-usuarios.component.scss'
 })
 export class AdminUsuariosComponent implements OnInit {
+  title:string = "Listado de usuarios"
   usuarios: UsuarioSaneado[] = []
 
   listOfCurrentPageData: any[] = []
@@ -40,6 +41,7 @@ export class AdminUsuariosComponent implements OnInit {
     this.authService.listaUsuarios().subscribe({
       next: (response) => {
         this.usuarios = response
+        console.log(this.usuarios)
       },
       error: (err) => {
         console.error('Error al listar sesión', err);
@@ -48,7 +50,7 @@ export class AdminUsuariosComponent implements OnInit {
   }
 
   editar(usuario: any) {
-    this.router.navigate([`/edit/${usuario.id}`]);
+    console.log(this.router.navigate([`/edit/${usuario.id}`]))
   }
 
 }
