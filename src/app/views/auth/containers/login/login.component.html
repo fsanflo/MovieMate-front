@@ -1,0 +1,49 @@
+<ng-container>
+  <div>
+    <h3 class="m-4">{{ title }}</h3>
+  </div>
+  <form [formGroup]="loginForm" class="m-4">
+    <mat-form-field class="w-100">
+      <mat-label>Email</mat-label>
+      <input formControlName="email" matInput type="email" required />
+      <i class="fas fa-at" matSuffix></i>
+    </mat-form-field>
+    <ng-container *ngIf="corregir">
+      <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+        El email es requerido
+      </mat-error>
+      <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+        El email no es válido
+      </mat-error>
+    </ng-container>
+    <mat-form-field class="w-100">
+      <mat-label>Contraseña</mat-label>
+      <input formControlName="contrasenha" matInput required type="password" />
+      <i class="fas fa-key" matSuffix></i>
+    </mat-form-field>
+    <ng-container *ngIf="corregir">
+      <mat-error *ngIf="loginForm.get('contrasenha')?.hasError('required')">
+        La contraseña es requerida
+      </mat-error>
+      <mat-error *ngIf="loginForm.get('contrasenha')?.hasError('minlength')">
+        La contraseña debe contener 6 dígitos o más
+      </mat-error>
+    </ng-container>
+    <div class="row my-3">
+      <div class="col-7">
+        <button class="btn btn-mm w-100" type="button" (click)="registrar()">
+          Registrarse
+        </button>
+      </div>
+      <div class="col-5">
+        <button
+          class="btn btn-primary w-100"
+          type="button"
+          (click)="submitLoginForm()"
+        >
+          Iniciar sesión
+        </button>
+      </div>
+    </div>
+  </form>
+</ng-container>

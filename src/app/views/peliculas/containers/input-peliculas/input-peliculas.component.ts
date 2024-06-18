@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router, RouterOutlet } from '@angular/router';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzCardComponent } from 'ng-zorro-antd/card';
 import { NzCardMetaComponent } from 'ng-zorro-antd/card';
 import { PeliculaService } from '../../pelicula.service';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Pelicula } from '../../models/peliculas.interface';
-import { SnackbarComponent } from '../../../../shared/snackbar/snackbar/snackbar.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatInputModule } from '@angular/material/input';
+
 
 
 @Component({
@@ -20,6 +20,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   imports: [
     CommonModule,
     NzIconModule,
+    MatLabel,
+    MatInputModule,
+    MatFormFieldModule,
     NzCardComponent,
     NzCardMetaComponent,
     MatFormFieldModule,
@@ -27,6 +30,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     AsyncPipe,
     HttpClientModule,
     RouterOutlet,
+    ReactiveFormsModule,
   ],
   templateUrl: './input-peliculas.component.html',
   styleUrl: './input-peliculas.component.scss'
@@ -42,10 +46,10 @@ export class InputPeliculasComponent implements OnInit {
   pelicula2: Pelicula = {} as Pelicula;
 
   cargando: boolean = false;
+  corregir: boolean = false;
   placeholder: string = '../../../../../assets/images/placeholder.png';
 
   constructor(
-    private route: ActivatedRoute,
     private peliculaService: PeliculaService,
     private fb: FormBuilder,
     private router: Router,
@@ -55,7 +59,7 @@ export class InputPeliculasComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.createInputPeliculasForm();
+    this.crearInputPeliculasForm();
     // this.showSnackbar();
   }
   //TODO Hacer que funcione desde aqui
@@ -68,7 +72,7 @@ export class InputPeliculasComponent implements OnInit {
   // }
 
 
-  createInputPeliculasForm() {
+  crearInputPeliculasForm() {
     this.inputPeliculasForm = this.fb.group({
       pelicula1: ['', Validators.required],
       pelicula2: ['', Validators.required],
@@ -130,6 +134,7 @@ export class InputPeliculasComponent implements OnInit {
 
 
   submitPeliculas() {
+
     if (this.pelicula1.id && this.pelicula2.id) {
 
       const idPeliculas = {

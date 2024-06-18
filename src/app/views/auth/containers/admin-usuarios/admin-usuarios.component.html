@@ -1,0 +1,40 @@
+<ng-container>
+  <div class="m-4 row">
+    <table>
+      <thead>
+        <tr>
+          <th nzColumnKey="nombre">Nombre</th>
+          <th nzColumnKey="email">Email</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios">
+          <td>{{ usuario.nombre }}</td>
+          <td>{{ usuario.email }}</td>
+          <td>
+            <div class="text-end">
+              <button
+                class="btn btn-primary px-4"
+                type="button"
+                (click)="editar(usuario)"
+              >
+                Editar
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="text-end p-0 mt-4">
+      <button
+        class="btn btn-mm col-2 mt-4 m-0"
+        type="button"
+        (click)="redirigirInicio()"
+      >
+        Atrás
+      </button>
+    </div>
+  </div>
+</ng-container>

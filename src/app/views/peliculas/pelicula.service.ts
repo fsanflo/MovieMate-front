@@ -11,7 +11,7 @@ import { Actor, Genero, Pelicula } from './models/peliculas.interface';
 export class PeliculaService {
   private peliculasPorGeneros = new BehaviorSubject<any[]>([]);
   peliculas$: Observable<Pelicula[]> = this.peliculasPorGeneros.asObservable();
-  apiUrl = `http://localhost:3001/api`;
+  private apiUrl = `http://localhost:3001/api`;
   constructor(
     private http: HttpClient
   ) { }
@@ -28,11 +28,12 @@ export class PeliculaService {
 
   peliculasPorGenero(idPeliculas: any) {
     const url = `${this.apiUrl}/peliculas/list`;
-    this.http.post<any>(url, idPeliculas).pipe(catchError(Helpers.handleError)).subscribe(response => {
-      const peliculas = response.listaPeliculas;
-      this.peliculasPorGeneros.next(peliculas);
+    this.http.post<any>(url, idPeliculas).pipe(catchError(Helpers.handleError))
+      .subscribe(response => {
+        const peliculas = response.listaPeliculas;
+        this.peliculasPorGeneros.next(peliculas);
 
-    });
+      });
   }
 
   actoresPelicula(id: number): Observable<Actor[]> {

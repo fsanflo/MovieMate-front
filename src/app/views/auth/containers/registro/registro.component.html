@@ -1,0 +1,89 @@
+<ng-container>
+  <div>
+    <h3 class="m-4">{{ title }}</h3>
+  </div>
+  <form [formGroup]="registroForm" class="m-4">
+    <mat-form-field class="w-100 my-2">
+      <mat-label>Nombre</mat-label>
+      <input formControlName="nombre" matInput type="text" required />
+    </mat-form-field>
+    <ng-container *ngIf="corregir">
+      <mat-error *ngIf="registroForm.get('nombre')?.hasError('required')">
+        El nombre es requerido
+      </mat-error>
+    </ng-container>
+
+    <mat-form-field class="w-100 my-2">
+      <mat-label>Email</mat-label>
+      <input formControlName="email" matInput type="email" required />
+    </mat-form-field>
+    <ng-container *ngIf="corregir">
+      <mat-error *ngIf="registroForm.get('email')?.hasError('required')">
+        El email es requerido
+      </mat-error>
+      <mat-error *ngIf="registroForm.get('email')?.hasError('email')">
+        El email no es válido
+      </mat-error>
+    </ng-container>
+
+    <mat-form-field class="w-100 my-2">
+      <mat-label>Contraseña</mat-label>
+      <input formControlName="contrasenha" matInput required type="password" />
+      <i class="fas fa-key" matSuffix></i>
+    </mat-form-field>
+    <ng-container *ngIf="corregir">
+      <mat-error *ngIf="registroForm.get('contrasenha')?.hasError('required')">
+        La contraseña es requerida
+      </mat-error>
+      <mat-error *ngIf="registroForm.get('contrasenha')?.hasError('minlength')">
+        La contraseña debe contener 6 dígitos o más
+      </mat-error>
+    </ng-container>
+
+    <mat-form-field class="w-100 my-2">
+      <mat-label>Repetir contraseña</mat-label>
+      <input
+        formControlName="repetirContrasenha"
+        matInput
+        required
+        type="password"
+      />
+      <i class="fas fa-key" matSuffix></i>
+    </mat-form-field>
+    <ng-container *ngIf="corregir">
+      <mat-error
+        *ngIf="registroForm.get('repetirContrasenha')?.hasError('required')"
+      >
+        La contraseña es requerida
+      </mat-error>
+      <mat-error
+        *ngIf="registroForm.get('repetirContrasenha')?.hasError('minlength')"
+      >
+        La contraseña debe contener 6 dígitos o más
+      </mat-error>
+      <mat-error *ngIf="contrasenhasDiferentes">
+        Las contraseñas no coinciden
+      </mat-error>
+    </ng-container>
+    <div class="row my-3">
+      <div class="col-5">
+        <button
+          class="btn btn-mm w-100"
+          type="button"
+          (click)="redirigirLogin()"
+        >
+          Atrás
+        </button>
+      </div>
+      <div class="col-7">
+        <button
+          class="btn btn-primary w-100"
+          type="button"
+          (click)="submitRegistroForm()"
+        >
+          Crear usuario
+        </button>
+      </div>
+    </div>
+  </form>
+</ng-container>

@@ -2,60 +2,78 @@
   <div>
     <h3 class="m-4">{{ title }}</h3>
   </div>
+  <form [formGroup]="inputPeliculasForm">
+    <div class="row justify-content-around m-4">
+      <div class="tarjeta col-2 rounded p-3">
+        <div class="portada rounded">
+          <img [src]="placeholder" alt="pelicula1" class="w-100 rounded" />
+        </div>
 
-  <div class="row justify-content-around m-4">
-    <div class="tarjeta col-2 rounded p-3">
-      <div class="portada rounded">
-        <img [src]="placeholder" alt="pelicula1" class="w-100 rounded" />
+        <input
+          matInput
+          [matAutocomplete]="auto1"
+          (input)="buscarPeliculas($event.target)"
+          formControlName="pelicula1"
+          placeholder="Tu película"
+          class="form-control mt-1 w-100"
+        />
+        <mat-autocomplete #auto1>
+          <mat-option
+            *ngFor="let pelicula of peliculas"
+            (click)="peliculaSeleccionada(pelicula, 'pelicula1')"
+          >
+            {{ pelicula.titulo }}
+          </mat-option>
+        </mat-autocomplete>
+        <ng-container *ngIf="corregir">
+          <mat-error
+          class="error"
+            *ngIf="!this.pelicula1.id"
+          >
+            {{ "Debes introducir ambas películas" }}
+          </mat-error>
+        </ng-container>
       </div>
-      <input
-        matInput
-        [matAutocomplete]="auto1"
-        (input)="buscarPeliculas($event.target)"
-        formControlName="pelicula1"
-        placeholder="Tu película"
-        class="form-control mt-1 w-100"
-      />
-      <mat-autocomplete #auto1>
-        <mat-option
-          *ngFor="let pelicula of peliculas"
-          (click)="peliculaSeleccionada(pelicula, 'pelicula1')"
-        >
-          {{ pelicula.titulo }}
-        </mat-option>
-      </mat-autocomplete>
+
+      <div class="tarjeta col-2 rounded p-3">
+        <div class="portada rounded">
+          <img [src]="placeholder" alt="pelicula2" class="w-100 rounded" />
+        </div>
+        <input
+          matInput
+          [matAutocomplete]="auto2"
+          (input)="buscarPeliculas($event.target)"
+          formControlName="pelicula2"
+          placeholder="Su película"
+          class="form-control mt-1 w-100"
+        />
+        <mat-autocomplete #auto2>
+          <mat-option
+            *ngFor="let pelicula of peliculas"
+            (click)="peliculaSeleccionada(pelicula, 'pelicula2')"
+          >
+            {{ pelicula.titulo }}
+          </mat-option>
+        </mat-autocomplete>
+        <ng-container *ngIf="corregir">
+          <mat-error
+            class="error"
+            *ngIf="!this.pelicula2.id"
+          >
+            {{ "Debes introducir ambas películas" }}
+          </mat-error>
+        </ng-container>
+      </div>
     </div>
 
-    <div class="tarjeta col-2 rounded p-3">
-      <div class="portada rounded">
-        <img [src]="placeholder" alt="pelicula2" class="w-100 rounded" />
-      </div>
-      <input
-        matInput
-        [matAutocomplete]="auto2"
-        (input)="buscarPeliculas($event.target)"
-        formControlName="pelicula2"
-        placeholder="Su película"
-        class="form-control mt-1 w-100"
-      />
-      <mat-autocomplete #auto2>
-        <mat-option
-          *ngFor="let pelicula of peliculas"
-          (click)="peliculaSeleccionada(pelicula, 'pelicula2')"
-        >
-          {{ pelicula.titulo }}
-        </mat-option>
-      </mat-autocomplete>
-    </div>
-  </div>
-
-  <div class="d-flex justify-content-center m-5">
-    <!-- <button class="btn col-2 mx-4">
+    <div class="d-flex justify-content-center m-5">
+      <!-- <button class="btn col-2 mx-4">
       <span nz-icon nzType="swap" nzTheme="outline">Aletorio </span>
     </button> -->
 
-    <button (click)="submitPeliculas()" class="btn btn-mm col-2 mx-4">
-      <span nz-icon nzType="search" nzTheme="outline">Buscar </span>
-    </button>
-  </div>
+      <button (click)="submitPeliculas()" class="btn btn-mm col-2 mx-4">
+        <span nz-icon nzType="search" nzTheme="outline">Buscar </span>
+      </button>
+    </div>
+  </form>
 </div>
